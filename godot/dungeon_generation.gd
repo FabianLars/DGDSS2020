@@ -2,8 +2,8 @@ extends Node
 
 var room = preload("res://Room.tscn")
 
-var min_number_rooms = 10
-var max_number_rooms = 100
+var min_number_rooms = 6
+var max_number_rooms = 12
 
 var generation_chance = 20
 
