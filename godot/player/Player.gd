@@ -1,8 +1,25 @@
 extends KinematicBody2D
 
-const MAX_SPEED = 500
+const MAX_SPEED = 500 # evtl var statt const, siehe bullet_speed
 const ACCELERATION = 2000
 var motion = Vector2.ZERO
+export var bullet_speed = 1000 # var damit items das buffen können
+export var fire_rate = 0.2 # var damit items das buffen können
+
+var bullet = preload("res://player/Bullet.tscn")
+var can_fire = true
+
+func _process(_delta):
+	$BulletPoint.look_at(get_global_mouse_position())
+	if Input.is_action_pressed("fire") and can_fire:
+		var bullet_instance = bullet.instance()
+		bullet_instance.position = $BulletPoint.get_global_position()
+		bullet_instance.rotation_degrees = $BulletPoint.rotation_degrees
+		bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated($BulletPoint.rotation))
+		get_tree().get_root().add_child(bullet_instance)
+		can_fire = false
+		yield(get_tree().create_timer(fire_rate), "timeout")
+		can_fire = true
 
 func _physics_process(delta):
 	var axis = get_input_axis()

@@ -15,3 +15,6 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="BulletPoint" type="Node2D" parent="."]
+position = Vector2( 0, 20 )
