@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="dgd"
 config/icon="res://icon.png"
 
+[autoload]
+
+dungeon_generation="*res://dungeon_generation.gd"
+
 [display]
 
 window/size/width=1920
