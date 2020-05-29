@@ -14,7 +14,7 @@ func _process(_delta):
         var bullet_instance = bullet.instance()
         bullet_instance.position = $BulletPoint.get_global_position()
         bullet_instance.rotation_degrees = 180
-        bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(deg2rad(180)))
+        bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, -motion.y/1.8).rotated(deg2rad(180)))
         get_tree().get_root().add_child(bullet_instance)
         can_fire = false
         yield(get_tree().create_timer(fire_rate), "timeout")
@@ -23,7 +23,7 @@ func _process(_delta):
         var bullet_instance = bullet.instance()
         bullet_instance.position = $BulletPoint.get_global_position()
         bullet_instance.rotation_degrees = 0
-        bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(deg2rad(0)))
+        bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, motion.y/1.8).rotated(deg2rad(0)))
         get_tree().get_root().add_child(bullet_instance)
         can_fire = false
         yield(get_tree().create_timer(fire_rate), "timeout")
@@ -32,7 +32,7 @@ func _process(_delta):
         var bullet_instance = bullet.instance()
         bullet_instance.position = $BulletPoint.get_global_position()
         bullet_instance.rotation_degrees = -90
-        bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(deg2rad(-90)))
+        bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, motion.x/1.8).rotated(deg2rad(-90)))
         get_tree().get_root().add_child(bullet_instance)
         can_fire = false
         yield(get_tree().create_timer(fire_rate), "timeout")
@@ -41,7 +41,7 @@ func _process(_delta):
         var bullet_instance = bullet.instance()
         bullet_instance.position = $BulletPoint.get_global_position()
         bullet_instance.rotation_degrees = 90
-        bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(deg2rad(90)))
+        bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, -motion.x/1.8).rotated(deg2rad(90)))
         get_tree().get_root().add_child(bullet_instance)
         can_fire = false
         yield(get_tree().create_timer(fire_rate), "timeout")
