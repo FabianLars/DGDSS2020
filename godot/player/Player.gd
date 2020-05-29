@@ -4,7 +4,7 @@ const MAX_SPEED = 500 # evtl var statt const, siehe bullet_speed
 const ACCELERATION = 2000
 var motion = Vector2.ZERO
 export var bullet_speed = 1000 # var damit items das buffen können
-export var fire_rate = 0.2 # var damit items das buffen können
+export var fire_rate = 0.5 # var damit items das buffen können
 
 var bullet = preload("res://player/Bullet.tscn")
 var can_fire = true
