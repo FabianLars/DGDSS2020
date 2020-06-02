@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PlayerTexture.png-40d01909703e4de6b83026e25125f43c.stex"
+path="res://.import/adventurer.png-98364153e0882c51ef62060a1a6538c1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/PlayerTexture.png"
-dest_files=[ "res://.import/PlayerTexture.png-40d01909703e4de6b83026e25125f43c.stex" ]
+source_file="res://player/adventurer.png"
+dest_files=[ "res://.import/adventurer.png-98364153e0882c51ef62060a1a6538c1.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
