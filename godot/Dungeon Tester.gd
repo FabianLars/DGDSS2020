@@ -33,7 +33,7 @@ func load_map():
             map_node.add_child(temp)
             temp.z_index = 0
             temp.rotation_degrees = 90
-            temp.position = i * 10 + Vector2(0-5, 5)
+            temp.position = i * 10 + Vector2(0.5, 5)
 
 func _on_Button_pressed():
     randomize()
