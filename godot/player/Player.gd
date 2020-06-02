@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+onready var anim = get_node("AnimationPlayer")
 const MAX_SPEED = 500 # evtl var statt const, siehe bullet_speed
 const ACCELERATION = 2000
 var motion = Vector2.ZERO
@@ -56,11 +57,7 @@ func _physics_process(delta):
 	else:
 		apply_movement(axis * ACCELERATION * delta)
 	motion = move_and_slide(motion)
-	spritedir_loop()
-	if axis != Vector2(0,0):
-		animation_switch("walk")	
-	else:
-		animation_switch("idle")
+	animation_loop()
 
 func get_input_axis():
 	var axis = Vector2.ZERO
@@ -78,13 +75,22 @@ func apply_movement(acceleration):
 	motion += acceleration
 	motion = motion.clamped(MAX_SPEED)
 
-func spritedir_loop():
-	if(Input.is_action_pressed("move_right")):
-		get_node("Sprite").set_flip_h(false)
-	if(Input.is_action_pressed("move_left")):
+func animation_loop():
+	if Input.is_action_pressed("shoot_up") and can_fire:
+		anim.play("shoot")
+	elif Input.is_action_pressed("shoot_down") and can_fire:
+		anim.play("shoot")
+	elif Input.is_action_pressed("shoot_left") and can_fire:
 		get_node("Sprite").set_flip_h(true)
-
-func animation_switch(animation):
-	var newanimation = str(animation)
-	if $AnimationPlayer.current_animation != newanimation:
-		$AnimationPlayer.play(newanimation)
+		anim.play("shoot")
+	elif Input.is_action_pressed("shoot_right") and can_fire:
+		get_node("Sprite").set_flip_h(false)
+		anim.play("shoot")
+	elif(Input.is_action_pressed("move_right")):
+		get_node("Sprite").set_flip_h(false)
+		anim.play("walk")
+	elif(Input.is_action_pressed("move_left")):
+		get_node("Sprite").set_flip_h(true)
+		anim.play("walk")
+	else:
+		anim.play("idle")
