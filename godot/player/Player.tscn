@@ -4,7 +4,7 @@
 [ext_resource path="res://player/adventurer.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12, 16 )
+extents = Vector2( 10, 5 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -49,10 +49,10 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 vframes = 13
 hframes = 14
-frame = 1
+frame = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, 7 )
+position = Vector2( 0, 36 )
 scale = Vector2( 3, 3 )
 shape = SubResource( 1 )
 
