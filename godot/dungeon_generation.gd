@@ -51,9 +51,7 @@ func generate(room_seed):
 		for i in dungeon.keys():
 			dungeon.get(i).queue_free()
 		var new_seed = room_seed * rand_range(-1,1) + rand_range(-100,100)
-		print(new_seed)
 		dungeon = generate(new_seed)
-	print(dungeon)
 	return dungeon
 
 func connect_rooms(room1, room2, direction):
