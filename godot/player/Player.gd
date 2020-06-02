@@ -16,6 +16,7 @@ func _process(_delta):
 		bullet_instance.rotation_degrees = 180
 		bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, -motion.y/1.8).rotated(deg2rad(180)))
 		get_tree().get_root().add_child(bullet_instance)
+		get_node("Sprite").set_flip_h(true)
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
 		can_fire = true
@@ -25,6 +26,7 @@ func _process(_delta):
 		bullet_instance.rotation_degrees = 0
 		bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, motion.y/1.8).rotated(deg2rad(0)))
 		get_tree().get_root().add_child(bullet_instance)
+		get_node("Sprite").set_flip_h(false)
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
 		can_fire = true
@@ -56,7 +58,7 @@ func _physics_process(delta):
 	motion = move_and_slide(motion)
 	spritedir_loop()
 	if axis != Vector2(0,0):
-		animation_switch("walk")
+		animation_switch("walk")	
 	else:
 		animation_switch("idle")
 
