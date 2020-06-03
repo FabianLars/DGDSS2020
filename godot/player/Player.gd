@@ -61,8 +61,8 @@ func _physics_process(delta):
 
 func get_input_axis():
 	var axis = Vector2.ZERO
-	axis.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
-	axis.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
+	axis.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	axis.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	return axis.normalized()
 
 func apply_friction(amount):
