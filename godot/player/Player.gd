@@ -87,8 +87,8 @@ func animation_loop():
 	elif Input.is_action_just_pressed("shoot_right") and can_fire:
 		get_node("Sprite").set_flip_h(false)
 		anim.play("shoot")
-	elif anim.current_animation == "shoot":
-		pass
+	#elif anim.current_animation == "shoot":
+		#pass
 	elif(Input.is_action_pressed("move_left")):
 		get_node("Sprite").set_flip_h(true)
 		anim.play("walk")
