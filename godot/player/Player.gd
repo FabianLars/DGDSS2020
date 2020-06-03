@@ -5,7 +5,7 @@ const MAX_SPEED = 500 # evtl var statt const, siehe bullet_speed
 const ACCELERATION = 2000
 var motion = Vector2.ZERO
 export var bullet_speed = 1000 # var damit items das buffen können
-export var fire_rate = 0.45 # var damit items das buffen können
+export var fire_rate = 0.40 # var damit items das buffen können
 
 var bullet = preload("res://player/Bullet.tscn")
 var can_fire = true
@@ -87,13 +87,13 @@ func animation_loop():
 	elif Input.is_action_just_pressed("shoot_right") and can_fire:
 		get_node("Sprite").set_flip_h(false)
 		anim.play("shoot")
+	elif anim.current_animation == "shoot":
+		pass
 	elif(Input.is_action_pressed("move_left")):
 		get_node("Sprite").set_flip_h(true)
 		anim.play("walk")
 	elif (Input.is_action_pressed("move_right")):
 		get_node("Sprite").set_flip_h(false)
 		anim.play("walk")
-	elif anim.current_animation == "shoot" and anim.is_playing():
-		pass
 	else:
 		anim.play("idle")
