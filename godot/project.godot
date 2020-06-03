@@ -16,12 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="dgd"
-run/main_scene="res://areas/basic_room.tscn"
+run/main_scene="res://Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 dungeon_generation="*res://dungeon_generation.gd"
+Game="*res://Game.gd"
 
 [display]
 
