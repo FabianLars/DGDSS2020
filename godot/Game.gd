@@ -8,7 +8,7 @@ var player = null
 # Sollte eigentlich in Menü Szene aufgerufen werden.
 func _ready():
 	randomize()
-	dungeon = dungeon_generation.generate(0)#rand_range(-1000, 1000)
+	dungeon = dungeon_generation.generate(rand_range(-1000, 1000))
 	change_to_instance(dungeon.get(Vector2(0, 0)))
 
 func change_to_instance(instance):
