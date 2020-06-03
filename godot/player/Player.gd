@@ -4,12 +4,16 @@ onready var anim = get_node("AnimationPlayer")
 const MAX_SPEED = 500 # evtl var statt const, siehe bullet_speed
 const ACCELERATION = 2000
 var motion = Vector2.ZERO
+var state_machine
 export var bullet_speed = 1000 # var damit items das buffen können
 export var fire_rate = 0.40 # var damit items das buffen können
 
 var bullet = preload("res://player/Bullet.tscn")
 var can_fire = true
 
+func _ready():
+	state_machine = $AnimationTree.get("parameters/playback")
+	
 func _process(_delta):
 	if Input.is_action_pressed("shoot_left") and can_fire:
 		can_fire = false
@@ -57,12 +61,32 @@ func _physics_process(delta):
 	else:
 		apply_movement(axis * ACCELERATION * delta)
 	motion = move_and_slide(motion)
-	animation_loop()
 
 func get_input_axis():
 	var axis = Vector2.ZERO
 	axis.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	axis.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
+	
+	#Animationskram
+	if axis == Vector2.ZERO:
+		state_machine.travel("idle")
+	elif(Input.is_action_pressed("move_left")):
+		get_node("Sprite").set_flip_h(true)
+		state_machine.travel("walk")
+	elif (Input.is_action_pressed("move_right")):
+		get_node("Sprite").set_flip_h(false)
+		state_machine.travel("walk")
+	else:
+		state_machine.travel("walk")
+	if Input.is_action_pressed("shoot_left"):
+		get_node("Sprite").set_flip_h(true)
+		state_machine.travel("shoot")
+	elif Input.is_action_pressed("shoot_right"):
+		get_node("Sprite").set_flip_h(false)
+		state_machine.travel("shoot")
+	elif Input.is_action_pressed("shoot_up") or Input.is_action_pressed("shoot_down"):
+		state_machine.travel("shoot")
+	
 	return axis.normalized()
 
 func apply_friction(amount):
@@ -75,25 +99,9 @@ func apply_movement(acceleration):
 	motion += acceleration
 	motion = motion.clamped(MAX_SPEED)
 
-func animation_loop():
-
-	if Input.is_action_just_pressed("shoot_up") and can_fire:
-		anim.play("shoot")
-	elif Input.is_action_just_pressed("shoot_down") and can_fire:
-		anim.play("shoot")
-	elif Input.is_action_just_pressed("shoot_left") and can_fire:
-		get_node("Sprite").set_flip_h(true)
-		anim.play("shoot")
-	elif Input.is_action_just_pressed("shoot_right") and can_fire:
-		get_node("Sprite").set_flip_h(false)
-		anim.play("shoot")
-	#elif anim.current_animation == "shoot":
-		#pass
-	elif(Input.is_action_pressed("move_left")):
-		get_node("Sprite").set_flip_h(true)
-		anim.play("walk")
-	elif (Input.is_action_pressed("move_right")):
-		get_node("Sprite").set_flip_h(false)
-		anim.play("walk")
-	else:
-		anim.play("idle")
+func hurt():
+	state_machine.travel("hurt") #Animation zu "hurt" ist noch nicht vorhanden
+	
+func die():
+	state_machine.travel("die") #Animation zu "die" ist noch nicht vorhanden
+	set_physics_process(false)
