@@ -2,6 +2,11 @@
 extends RigidBody2D
 
 #var explosion = preload("res://Explosion.tscn")
+var ttl = 1.5
+
+func _ready():
+	$Tween.interpolate_callback(self, ttl, "queue_free")
+	$Tween.start()
 
 func _on_Bullet_body_entered(body):
 	if !body.is_in_group("player"):
