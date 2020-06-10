@@ -9,11 +9,12 @@ var can_fire = true
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
+	$AnimationTree["parameters/shoot/TimeScale/scale"] = 1.0 / Game.p_fire_rate
 	
 func _process(_delta):
 	if Input.is_action_pressed("shoot_left") and can_fire:
 		can_fire = false
-		yield(get_tree().create_timer(Game.p_fire_rate), "timeout")
+		yield(get_tree().create_timer(Game.p_fire_rate * 0.4), "timeout")
 		var bullet_instance = bullet.instance()
 		bullet_instance.position = $BulletPoint.get_global_position()
 		bullet_instance.rotation_degrees = 180
@@ -23,7 +24,7 @@ func _process(_delta):
 		can_fire = true
 	if Input.is_action_pressed("shoot_right") and can_fire:
 		can_fire = false
-		yield(get_tree().create_timer(Game.p_fire_rate), "timeout")
+		yield(get_tree().create_timer(Game.p_fire_rate * 0.4), "timeout")
 		var bullet_instance = bullet.instance()
 		bullet_instance.position = $BulletPoint.get_global_position()
 		bullet_instance.rotation_degrees = 0
@@ -33,7 +34,7 @@ func _process(_delta):
 		can_fire = true
 	if Input.is_action_pressed("shoot_up") and can_fire:
 		can_fire = false
-		yield(get_tree().create_timer(Game.p_fire_rate), "timeout")
+		yield(get_tree().create_timer(Game.p_fire_rate * 0.4), "timeout")
 		var bullet_instance = bullet.instance()
 		bullet_instance.position = $BulletPoint.get_global_position()
 		bullet_instance.rotation_degrees = -90
@@ -42,7 +43,7 @@ func _process(_delta):
 		can_fire = true
 	if Input.is_action_pressed("shoot_down") and can_fire:
 		can_fire = false
-		yield(get_tree().create_timer(Game.p_fire_rate), "timeout")
+		yield(get_tree().create_timer(Game.p_fire_rate * 0.4), "timeout")
 		var bullet_instance = bullet.instance()
 		bullet_instance.position = $BulletPoint.get_global_position()
 		bullet_instance.rotation_degrees = 90
