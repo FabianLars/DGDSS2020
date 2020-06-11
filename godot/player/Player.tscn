@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/adventurer.png" type="Texture" id=2]
@@ -24,7 +24,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "walk"
-length = 0.45
+length = 0.4
 loop = true
 step = 0.05
 tracks/0/type = "value"
@@ -63,30 +63,40 @@ animation = "idle"
 [sub_resource type="AnimationNodeAnimation" id=6]
 animation = "shoot"
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeTimeScale" id=7]
+
+[sub_resource type="AnimationNodeBlendTree" id=8]
+nodes/Animation/node = SubResource( 6 )
+nodes/Animation/position = Vector2( 360, 100 )
+nodes/TimeScale/node = SubResource( 7 )
+nodes/TimeScale/position = Vector2( 580, 120 )
+nodes/output/position = Vector2( 780, 120 )
+node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
+
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=8]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=9]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=10]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=11]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachine" id=12]
+[sub_resource type="AnimationNodeStateMachine" id=14]
 states/idle/node = SubResource( 5 )
 states/idle/position = Vector2( 245, 53 )
-states/shoot/node = SubResource( 6 )
-states/shoot/position = Vector2( 394, 178 )
-states/walk/node = SubResource( 7 )
+states/shoot/node = SubResource( 8 )
+states/shoot/position = Vector2( 427, 193 )
+states/walk/node = SubResource( 9 )
 states/walk/position = Vector2( 579, 53 )
-transitions = [ "idle", "walk", SubResource( 8 ), "walk", "idle", SubResource( 9 ), "idle", "shoot", SubResource( 10 ), "shoot", "idle", SubResource( 11 ) ]
+transitions = [ "idle", "walk", SubResource( 10 ), "walk", "idle", SubResource( 11 ), "idle", "shoot", SubResource( 12 ), "shoot", "idle", SubResource( 13 ) ]
 start_node = "idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=13]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
 [node name="Player" type="KinematicBody2D" groups=[
 "Player",
@@ -98,7 +108,7 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 vframes = 10
 hframes = 20
-frame = 1
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 22 )
@@ -109,14 +119,16 @@ shape = SubResource( 1 )
 position = Vector2( 0, 20 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.4
 anims/idle = SubResource( 2 )
 anims/shoot = SubResource( 3 )
 anims/walk = SubResource( 4 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 12 )
+tree_root = SubResource( 14 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 13 )
+parameters/playback = SubResource( 15 )
+parameters/shoot/TimeScale/scale = 1.0
 [connection signal="animation_changed" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
