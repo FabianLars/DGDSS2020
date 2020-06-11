@@ -17,18 +17,18 @@ var p_acceleration = 2000 # Maximale Beschleunigung des Charakters; consider con
 func _ready():
 	randomize()
 	dungeon = dungeon_generation.generate(rand_range(-1000, 1000))
-	change_to_instance(dungeon.get(Vector2(0, 0)))
+	change_to_room(dungeon.get(Vector2(0, 0)))
 
-func change_to_instance(instance):
-	call_deferred("_deffered_change", instance)
+func change_to_room(instance, player_pos = Vector2(920, 500)):
+	call_deferred("_deffered_change", instance, player_pos)
 
-func _deffered_change(instance):
+func _deffered_change(instance, pos):
 	var root = get_node("/root")
 	if current_scene != null:
 		root.remove_child(current_scene)
 		player.queue_free()
 	player = player_res.instance()
-	player.position = Vector2(920, 500)
+	player.position = pos
 	root.add_child(player)
 	root.add_child(instance)
 	get_tree().set_current_scene(instance)

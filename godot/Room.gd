@@ -24,22 +24,22 @@ func _on_AreaLinks_body_entered(body):
 	if body.is_in_group("Player"):
 		for b in get_tree().get_nodes_in_group("Bullet"):
 			b.queue_free()
-		Game.change_to_instance(connected_rooms.get(Vector2(-1, 0)))
+		Game.change_to_room(connected_rooms.get(Vector2(-1, 0)), connected_rooms.get(Vector2(-1, 0)).get_node("SpawnRechts").position)
 
 func _on_AreaRechts_body_entered(body):
 	if body.is_in_group("Player"):
 		for b in get_tree().get_nodes_in_group("Bullet"):
 			b.queue_free()
-		Game.change_to_instance(connected_rooms.get(Vector2(1, 0)))
+		Game.change_to_room(connected_rooms.get(Vector2(1, 0)), connected_rooms.get(Vector2(1, 0)).get_node("SpawnLinks").position)
 
 func _on_AreaOben_body_entered(body):
 	if body.is_in_group("Player"):
 		for b in get_tree().get_nodes_in_group("Bullet"):
 			b.queue_free()
-		Game.change_to_instance(connected_rooms.get(Vector2(0, -1)))
+		Game.change_to_room(connected_rooms.get(Vector2(0, -1)), connected_rooms.get(Vector2(0, -1)).get_node("SpawnUnten").position)
 
 func _on_AreaUnten_body_entered(body):
 	if body.is_in_group("Player"):
 		for b in get_tree().get_nodes_in_group("Bullet"):
 			b.queue_free()
-		Game.change_to_instance(connected_rooms.get(Vector2(0, 1)))
+		Game.change_to_room(connected_rooms.get(Vector2(0, 1)), connected_rooms.get(Vector2(0, 1)).get_node("SpawnOben").position)
