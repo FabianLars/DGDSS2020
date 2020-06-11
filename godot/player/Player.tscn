@@ -111,8 +111,8 @@ hframes = 20
 frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 22 )
-scale = Vector2( 3, 3 )
+position = Vector2( 0, 10 )
+scale = Vector2( 3, 4 )
 shape = SubResource( 1 )
 
 [node name="BulletPoint" type="Node2D" parent="."]
