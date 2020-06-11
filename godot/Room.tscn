@@ -87,23 +87,23 @@ shape = SubResource( 1 )
 [node name="SpawnRechts" type="Node2D" parent="." groups=[
 "Spawnpunkte",
 ]]
-position = Vector2( 1780, 530 )
+position = Vector2( 1760, 530 )
 skew = 4.37114e-08
 
 [node name="SpawnLinks" type="Node2D" parent="." groups=[
 "Spawnpunkte",
 ]]
-position = Vector2( 140, 530 )
+position = Vector2( 160, 530 )
 
 [node name="SpawnOben" type="Node2D" parent="." groups=[
 "Spawnpunkte",
 ]]
-position = Vector2( 912, 140 )
+position = Vector2( 912, 160 )
 
 [node name="SpawnUnten" type="Node2D" parent="." groups=[
 "Spawnpunkte",
 ]]
-position = Vector2( 912, 940 )
+position = Vector2( 912, 910 )
 [connection signal="body_entered" from="AreaRechts" to="." method="_on_AreaRechts_body_entered"]
 [connection signal="body_entered" from="AreaLinks" to="." method="_on_AreaLinks_body_entered"]
 [connection signal="body_entered" from="AreaOben" to="." method="_on_AreaOben_body_entered"]
