@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Room.gd" type="Script" id=1]
+[ext_resource path="res://enemies/Chaser.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/wall.tres" type="TileSet" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -115,6 +116,18 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )
+
+[node name="Chaser" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1497.86, 812.163 )
+skew = 4.37114e-08
+
+[node name="Chaser2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1683.38, 477.996 )
+skew = 4.37114e-08
+
+[node name="Chaser3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1312.35, 213.992 )
+skew = 4.37114e-08
 [connection signal="body_entered" from="AreaRechts" to="." method="_on_AreaRechts_body_entered"]
 [connection signal="body_entered" from="AreaLinks" to="." method="_on_AreaLinks_body_entered"]
 [connection signal="body_entered" from="AreaOben" to="." method="_on_AreaOben_body_entered"]

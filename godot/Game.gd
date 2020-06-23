@@ -27,6 +27,7 @@ var p_bullet_speed = 1000 # Bullet speed
 var p_fire_rate = 1 # Schussrate
 var p_max_speed = 500 # Maximale Charakter Geschwindigkeit
 var p_acceleration = 2000 # Maximale Beschleunigung des Charakters; consider const
+var p_health = 3
 
 
 # Sollte eigentlich in Menü Szene aufgerufen werden.
@@ -43,6 +44,17 @@ func start_game():
 	randomize()
 	dungeon = dungeon_generation.generate(rand_range(-1000, 1000))
 	change_to_room(dungeon.get(Vector2(0, 0)))
+
+func end_game():
+	print("Game Over")
+	if player != null:
+		player.queue_free()
+	goto_scene(MAIN_MENU_PATH)
+	
+func reduce_health(amount):
+	p_health -= amount
+	if p_health < 1:
+			end_game()
 
 func goto_scene(path):
 	get_tree().change_scene(path)
