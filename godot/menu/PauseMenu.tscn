@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Allgemein/Titillium-Regular.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://menu/Titillium-Regular.otf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 2 )
+
+[node name="Pause_Popup" type="WindowDialog"]
+pause_mode = 2
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -140.0
+margin_top = -115.0
+margin_right = 235.0
+margin_bottom = 175.0
+rect_min_size = Vector2( 280, 290 )
+custom_fonts/title_font = SubResource( 1 )
+window_title = "Game paused"
+
+[node name="Button_resume" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -166.5
+margin_top = -215.0
+margin_right = 169.5
+margin_bottom = -135.0
+custom_fonts/font = SubResource( 2 )
+text = "Fortsetzen"
+
+[node name="Button_quit" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -166.5
+margin_top = -110.0
+margin_right = 169.5
+margin_bottom = -30.0
+custom_fonts/font = SubResource( 3 )
+text = "Zurück zum Hauptmenü"
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -140.0
+margin_right = 140.0
+margin_bottom = 80.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.767365, 0.753906, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "SPIEL PAUSIERT"
+align = 1
+valign = 1
