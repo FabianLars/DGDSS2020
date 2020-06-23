@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Room.gd" type="Script" id=1]
 [ext_resource path="res://environment/wall.tres" type="TileSet" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
 
 [node name="Room" type="Node2D"]
 script = ExtResource( 1 )
@@ -104,7 +106,17 @@ position = Vector2( 912, 160 )
 "Spawnpunkte",
 ]]
 position = Vector2( 912, 910 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 960, 535.828 )
+scale = Vector2( 83, 41 )
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 2 )
 [connection signal="body_entered" from="AreaRechts" to="." method="_on_AreaRechts_body_entered"]
 [connection signal="body_entered" from="AreaLinks" to="." method="_on_AreaLinks_body_entered"]
 [connection signal="body_entered" from="AreaOben" to="." method="_on_AreaOben_body_entered"]
 [connection signal="body_entered" from="AreaUnten" to="." method="_on_AreaUnten_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

@@ -43,3 +43,7 @@ func _on_AreaUnten_body_entered(body):
 		for b in get_tree().get_nodes_in_group("Bullet"):
 			b.queue_free()
 		Game.change_to_room(connected_rooms.get(Vector2(0, 1)), connected_rooms.get(Vector2(0, 1)).get_node("SpawnOben").position)
+
+func _on_Area2D_body_exited(body):
+    if body.is_in_group("Bullet"):
+        body.queue_free()
