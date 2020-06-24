@@ -41,6 +41,7 @@ func start_game():
 	set_overlay(false)
 	load_settings()
 	get_node("/root/MainMenuRoot").queue_free()
+	p_health = 3
 	randomize()
 	dungeon = dungeon_generation.generate(rand_range(-1000, 1000))
 	change_to_room(dungeon.get(Vector2(0, 0)))
