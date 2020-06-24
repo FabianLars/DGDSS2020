@@ -223,6 +223,7 @@ stream = ExtResource( 5 )
 script = ExtResource( 6 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 scale = Vector2( 1.5, 1.5 )
