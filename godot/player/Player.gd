@@ -78,8 +78,8 @@ func shoot(rot_deg):
 	yield(get_tree().create_timer(Game.p_fire_rate * 0.4), "timeout")
 	var bullet_instance = bullet.instance()
 	bullet_instance.position = $BulletPoint.get_global_position()
-	bullet_instance.rotation_degrees = 180
-	bullet_instance.apply_impulse(Vector2(), Vector2(Game.p_bullet_speed, -motion.y/1.8).rotated(deg2rad(180)))
+	bullet_instance.rotation_degrees = rot_deg
+	bullet_instance.apply_impulse(Vector2(), Vector2(Game.p_bullet_speed, -motion.y/1.8).rotated(deg2rad(rot_deg)))
 	get_tree().get_root().add_child(bullet_instance)
 	if rot_deg == 180:
 		get_node("Sprite").set_flip_h(true)

@@ -10,6 +10,7 @@ var connected_rooms = {
 var number_of_connections = 0
 
 func _ready():
+	# Geschlossene Türen(TileMap for now) an Verbindungsstellen zu anderen Räumen entfernen
 	if connected_rooms.get(Vector2(-1, 0)) != null:
 		remove_child($TuerLinks)
 	if connected_rooms.get(Vector2(1, 0)) != null:

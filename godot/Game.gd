@@ -27,7 +27,7 @@ var p_bullet_speed = 1000 # Bullet speed
 var p_fire_rate = 1 # Schussrate
 var p_max_speed = 500 # Maximale Charakter Geschwindigkeit
 var p_acceleration = 2000 # Maximale Beschleunigung des Charakters; consider const
-var p_health = 3
+var p_health = 3 # Lebenspunkte des Spielers
 
 
 # Sollte eigentlich in Menü Szene aufgerufen werden.
@@ -51,25 +51,30 @@ func end_game():
 	if player != null:
 		player.queue_free()
 	goto_scene(MAIN_MENU_PATH)
-	
+
 func reduce_health(amount):
 	p_health -= amount
 	if p_health < 1:
 			end_game()
 
+# Hauptsächlich für Menüs
 func goto_scene(path):
 	get_tree().change_scene(path)
 	set_overlay(false)
 	load_settings()
 
+# Ingame Raumwechsler, Position wird vom Raum übergeben oder als fallback die Mitte des Raumes
 func change_to_room(instance, player_pos = Vector2(920, 500)):
 	call_deferred("_deffered_change", instance, player_pos)
 
 func _deffered_change(instance, pos):
 	var root = get_node("/root")
 	if current_scene != null:
+		# aktuellen Raum entfernen
 		root.remove_child(current_scene)
+		# Spieler löschen
 		player.queue_free()
+	# neue Spieler Instanz (könnte man eigentlich so handlen wie Räume, seitdem die Spielerpositionierung überarbeitet wurde)
 	player = player_res.instance()
 	player.position = pos
 	root.add_child(player)
@@ -78,6 +83,7 @@ func _deffered_change(instance, pos):
 	current_scene = instance
 
 func _process(delta):
+	# Ingame Pause Menü
 	if Input.is_action_just_pressed("ui_cancel") and get_tree().get_current_scene().name != "MainMenuContainer":
 		if popup == null:
 			popup = POPUP_SCENE.instance()
@@ -120,7 +126,7 @@ func set_debug_display(display_on):
 		if debug_display == null:
 			debug_display = DEBUG_DISPLAY_SCENE.instance()
 			canvas_layer.add_child(debug_display)
-	
+
 func save_settings():
 	var settings_file = File.new()
 	settings_file.open("user://settings.json", File.WRITE)
@@ -129,7 +135,7 @@ func save_settings():
 		var node_data = i.call("save_settings_to_file");
 		settings_file.store_line(to_json(node_data))
 	settings_file.close()
-	
+
 func load_settings():
 	var settings_file = File.new()
 	if not settings_file.file_exists("user://settings.json"):
